@@ -1,6 +1,7 @@
 package org.bzbase.domain.organization.valueobject;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import lombok.Builder;
 import lombok.Value;
@@ -19,9 +20,9 @@ public class EmployeeJobInfo {
     private DepartmentId departmentId;
 
     /**
-     * 岗位ID
+     * 岗位ID列表，第一个为主岗位
      */
-    private PositionId positionId;
+    private List<PositionId> positionIds;
 
     /**
      * 工号
