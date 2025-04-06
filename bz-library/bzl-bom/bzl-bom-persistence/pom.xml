@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.bzbase.library</groupId>
         <artifactId>bzl-bom</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>bzl-bom-persistence</artifactId>
@@ -31,10 +31,10 @@
         <spring.data.mongodb.version>3.4.18</spring.data.mongodb.version>
         <mongodb.driver.version>4.6.1</mongodb.driver.version>
         <yitter.idgenerator.version>1.0.6</yitter.idgenerator.version>
-        <bz.persistence.changeTracking.version>1.0-SNAPSHOT</bz.persistence.changeTracking.version>
-        <bz.persistence.mybatis.version>1.0-SNAPSHOT</bz.persistence.mybatis.version>
-        <bz.persistence.mybatis.plus.version>1.0-SNAPSHOT</bz.persistence.mybatis.plus.version>
-        <bz.persistence.test.version>1.0-SNAPSHOT</bz.persistence.test.version>
+        <bz.persistence.changeTracking.version>1.1-SNAPSHOT</bz.persistence.changeTracking.version>
+        <bz.persistence.mybatis.version>1.1-SNAPSHOT</bz.persistence.mybatis.version>
+        <bz.persistence.mybatis.plus.version>1.1-SNAPSHOT</bz.persistence.mybatis.plus.version>
+        <bz.persistence.test.version>1.1-SNAPSHOT</bz.persistence.test.version>
         <freemarker.version>2.3.31</freemarker.version>
         <spring.test.version>5.3.36</spring.test.version>
         <testcontainers.bom.version>1.19.8</testcontainers.bom.version>
