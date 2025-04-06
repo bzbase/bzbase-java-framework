@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.bzbase.primitive</groupId>
+        <artifactId>bz-primitive</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>bzp-password</artifactId>
+
+    <properties>
+        <zxcvbn.version>1.9.0</zxcvbn.version>
+        <password4j.version>1.8.2</password4j.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.nulab-inc</groupId>
+            <artifactId>zxcvbn</artifactId>
+            <version>${zxcvbn.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.password4j</groupId>
+            <artifactId>password4j</artifactId>
+            <version>${password4j.version}</version>
+        </dependency>
+    </dependencies>
+</project>

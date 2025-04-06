@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.bzbase.domain</groupId>
+    <artifactId>bz-domain</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>bzd-email</module>
+        <module>bzd-user</module>
+        <module>bzd-authentication</module>
+        <module>bzd-organization</module>
+        <module>bzd-menu</module>
+        <module>bzd-rbac</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
+        <bz.library.version>1.0-SNAPSHOT</bz.library.version>
+        <bz.primitive.version>1.0-SNAPSHOT</bz.primitive.version>
+        <bz.domain.version>1.0-SNAPSHOT</bz.domain.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.bzbase.library</groupId>
+                <artifactId>bzl-bom-library</artifactId>
+                <version>${bz.library.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.bzbase.library</groupId>
+                <artifactId>bzl-bom-utils</artifactId>
+                <version>${bz.library.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+            <dependency>
+                <groupId>org.bzbase.library</groupId>
+                <artifactId>bzl-bom-test</artifactId>
+                <version>${bz.library.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- bz library dependencies -->
+        <!-- bz domain -->
+        <dependency>
+            <groupId>org.bzbase.library</groupId>
+            <artifactId>bzl-ddd</artifactId>
+        </dependency>
+        <!-- bz i18n -->
+        <dependency>
+            <groupId>org.bzbase.library</groupId>
+            <artifactId>bzl-i18n</artifactId>
+        </dependency>
+
+        <!-- utils dependencies -->
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <!-- apache commons lang3 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+
+        <!-- test dependencies -->
+        <!-- junit -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- mockito -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- assertj -->
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.plugin.version}</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <parameters>true</parameters>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

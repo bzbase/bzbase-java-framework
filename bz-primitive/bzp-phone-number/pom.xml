@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.bzbase.primitive</groupId>
+        <artifactId>bz-primitive</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>bzp-phone-number</artifactId>
+
+    <properties>
+        <libphonenumber.version>8.13.48</libphonenumber.version>
+        <libphonenumber.geocoder.version>2.228</libphonenumber.geocoder.version>
+        <libphonenumber.carrier.version>1.218</libphonenumber.carrier.version>
+    </properties>
+
+    <dependencies>
+        <!-- google libphonenumber -->
+        <dependency>
+            <groupId>com.googlecode.libphonenumber</groupId>
+            <artifactId>libphonenumber</artifactId>
+            <version>${libphonenumber.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.libphonenumber</groupId>
+            <artifactId>geocoder</artifactId>
+            <version>${libphonenumber.geocoder.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.googlecode.libphonenumber</groupId>
+            <artifactId>carrier</artifactId>
+            <version>${libphonenumber.carrier.version}</version>
+        </dependency>
+    </dependencies>
+</project>

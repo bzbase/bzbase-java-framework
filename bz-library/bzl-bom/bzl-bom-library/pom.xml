@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.bzbase.library</groupId>
+        <artifactId>bzl-bom</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>bzl-bom-library</artifactId>
+    <packaging>pom</packaging>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- bz ddd -->
+            <dependency>
+                <groupId>org.bzbase.library</groupId>
+                <artifactId>bzl-ddd</artifactId>
+                <version>${bz.library.version}</version>
+            </dependency>
+            <!-- bz i18n -->
+            <dependency>
+                <groupId>org.bzbase.library</groupId>
+                <artifactId>bzl-i18n</artifactId>
+                <version>${bz.library.version}</version>
+            </dependency>
+            <!-- bz persistence change tracking -->
+            <dependency>
+                <groupId>org.bzbase.library</groupId>
+                <artifactId>bzl-persistence-change-tracking</artifactId>
+                <version>${bz.library.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>
