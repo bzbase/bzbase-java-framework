@@ -11,6 +11,7 @@ import org.bzbase.domain.user.infrastructure.UserRepository;
 import org.bzbase.domain.user.service.UserRegisterService;
 import org.bzbase.domain.user.valueobject.UserPoolId;
 import org.bzbase.domain.user.valueobject.UserProfile;
+import org.bzbase.domain.user.valueobject.UserStatus;
 import org.bzbase.domain.user.valueobject.Verifiable;
 import org.bzbase.library.ddd.exception.DomainException;
 import org.bzbase.library.ddd.type.IdGenerator;
@@ -74,7 +75,12 @@ public class UserRegisterServiceImpl implements UserRegisterService {
             throw new DomainException(String.format("此%s已被注册", identifier.getTypeName()));
         }
         // 创建一个新用户
-        User user = User.create(new UserId(idGenerator.generate()), userPool.getId(), userProfile);
+        User user = User.builder()
+                .id(new UserId(idGenerator.generate()))
+                .poolId(userPool.getId())
+                .profile(userProfile)
+                .status(UserStatus.ACTIVE)
+                .build();
         // 绑定用户本地身份
         user.bindIdentifier(verifiableIdentifier);
         // 添加密码认证因素
@@ -90,7 +96,12 @@ public class UserRegisterServiceImpl implements UserRegisterService {
             PlainPassword password, UserProfile userProfile) {
         UserPool userPool = userPoolRepository.findById(userPoolId).orElseThrow(() -> new DomainException("非法的用户池"));
         // 创建一个新用户
-        User user = User.create(new UserId(idGenerator.generate()), userPool.getId(), userProfile);
+        User user = User.builder()
+                .id(new UserId(idGenerator.generate()))
+                .poolId(userPool.getId())
+                .profile(userProfile)
+                .status(UserStatus.ACTIVE)
+                .build();
         // 绑定用户外部身份
         user.bindExternalIdentifier(externalIdentifier);
         // 添加密码认证因素

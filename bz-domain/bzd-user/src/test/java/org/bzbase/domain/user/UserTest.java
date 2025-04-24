@@ -45,7 +45,11 @@ class UserTest {
 				.gender(Gender.MALE)
 				.birthdate(Birthdate.of(LocalDate.of(1990, 1, 1)))
 				.build();
-		User user = User.create(userId, poolId, profile);
+		User user = User.builder()
+				.id(userId)
+				.poolId(poolId)
+				.profile(profile)
+				.build();
 		assertThat(user.getId()).isEqualTo(userId);
 		assertThat(user.getPoolId()).isEqualTo(poolId);
 		assertThat(user.getProfile()).isEqualTo(profile);
@@ -55,7 +59,11 @@ class UserTest {
 	void test_bind_identifier() {
 		UserId userId = new UserId("1234567890");
 		UserPoolId poolId = new UserPoolId("1234567890");
-		User user = User.create(userId, poolId, null);
+		User user = User.builder()
+				.id(userId)
+				.poolId(poolId)
+				.profile(null)
+				.build();
 		UsernameIdentifier identifier = new UsernameIdentifier(Username.of("zhangsan"));
 		Verifiable<Identifier> verifiableIdentifier = Verifiable.verified(identifier);
 		user.bindIdentifier(verifiableIdentifier);
@@ -66,7 +74,11 @@ class UserTest {
 	void test_unbind_identifier() {
 		UserId userId = new UserId("1234567890");
 		UserPoolId poolId = new UserPoolId("1234567890");
-		User user = User.create(userId, poolId, null);
+		User user = User.builder()
+				.id(userId)
+				.poolId(poolId)
+				.profile(null)
+				.build();
 		UsernameIdentifier identifier = new UsernameIdentifier(Username.of("zhangsan"));
 		user.bindIdentifier(Verifiable.verified(identifier));
 		user.unbindIdentifierByType(identifier.getType());
@@ -77,7 +89,11 @@ class UserTest {
 	void test_add_auth_factor() {
 		UserId userId = new UserId("1234567890");
 		UserPoolId poolId = new UserPoolId("1234567890");
-		User user = User.create(userId, poolId, null);
+		User user = User.builder()
+				.id(userId)
+				.poolId(poolId)
+				.profile(null)
+				.build();
 		PasswordFactor authFactor = new PasswordFactor(HashedPassword.of("MD5", "123456"));
 		user.addAuthFactor(authFactor);
 		assertThat(user.getAuthFactors()).contains(authFactor);
@@ -88,7 +104,11 @@ class UserTest {
 	void test_remove_auth_factor() {
 		UserId userId = new UserId("1234567890");
 		UserPoolId poolId = new UserPoolId("1234567890");
-		User user = User.create(userId, poolId, null);
+		User user = User.builder()
+				.id(userId)
+				.poolId(poolId)
+				.profile(null)
+				.build();
 		PasswordFactor authFactor = new PasswordFactor(HashedPassword.of("MD5", "123456"));
 		user.addAuthFactor(authFactor);
 		user.removeAuthFactorByType(AuthenticationFactorType.PASSWORD.name());
@@ -100,7 +120,11 @@ class UserTest {
 	void test_change_password() {
 		UserId userId = new UserId("1234567890");
 		UserPoolId poolId = new UserPoolId("1234567890");
-		User user = User.create(userId, poolId, null);
+		User user = User.builder()
+				.id(userId)
+				.poolId(poolId)
+				.profile(null)
+				.build();
 		HashedPassword hashedPassword = HashedPassword.of("MD5", "123456");
 		user.changePassword(hashedPassword);
 		assertThat(user.getPassword()).hasValue(hashedPassword);
@@ -110,7 +134,11 @@ class UserTest {
 	void test_verify_password() {
 		UserId userId = new UserId("1234567890");
 		UserPoolId poolId = new UserPoolId("1234567890");
-		User user = User.create(userId, poolId, null);
+		User user = User.builder()
+				.id(userId)
+				.poolId(poolId)
+				.profile(null)
+				.build();
 		PasswordHasher passwordHasher = new BCryptPasswordHasher();
 		PlainPassword plainPassword = PlainPassword.of("123456");
 		HashedPassword hashedPassword = passwordHasher.hash(plainPassword);

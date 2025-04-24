@@ -15,6 +15,7 @@
         <module>bzl-ddd</module>
         <module>bzl-persistence</module>
         <module>bzl-security</module>
+        <module>bzl-pagination</module>
     </modules>
 
     <properties>

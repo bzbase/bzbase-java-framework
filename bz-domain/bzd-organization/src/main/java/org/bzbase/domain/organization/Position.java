@@ -1,26 +1,36 @@
 package org.bzbase.domain.organization;
 
-import org.bzbase.domain.organization.valueobject.OrganizationId;
+import java.time.Instant;
+
 import org.bzbase.domain.organization.valueobject.PositionId;
-import org.bzbase.library.ddd.type.LifecycleAggregateRoot;
+import org.bzbase.library.ddd.type.AbstractAggregateRoot;
+import org.bzbase.primitive.organization.OrganizationId;
+import org.bzbase.primitive.tenant.TenantId;
 import org.bzbase.primitive.user.UserId;
 
+import lombok.Builder;
 import lombok.Getter;
-import lombok.experimental.SuperBuilder;
+import lombok.Setter;
 
 /**
  * 岗位聚合根
  */
 @Getter
-@SuperBuilder(toBuilder = true)
-public class Position extends LifecycleAggregateRoot<PositionId> {
+@Setter
+@Builder(toBuilder = true)
+public class Position extends AbstractAggregateRoot<PositionId> {
 	/**
 	 * 岗位ID
 	 */
 	private PositionId id;
 
 	/**
-	 * 所属组织ID
+	 * 租户ID
+	 */
+	private TenantId tenantId;
+
+	/**
+	 * 组织ID
 	 */
 	private OrganizationId organizationId;
 
@@ -28,6 +38,11 @@ public class Position extends LifecycleAggregateRoot<PositionId> {
 	 * 岗位名称
 	 */
 	private String name;
+
+	/**
+	 * 上级岗位ID
+	 */
+    private PositionId parentId;
 
 	/**
 	 * 岗位编码
@@ -40,35 +55,17 @@ public class Position extends LifecycleAggregateRoot<PositionId> {
 	private String description;
 
 	/**
-	 * 创建岗位
+	 * 排序
 	 */
-	public static Position create(PositionId positionId, OrganizationId organizationId,
-			String name, String code, String description, UserId currentUserId) {
-		Position position = Position.builder()
-				.id(positionId)
-				.organizationId(organizationId)
-				.name(name)
-				.code(code)
-				.description(description)
-				.build();
-		position.markAsCreated(currentUserId);
-		return position;
-	}
+	private Integer sort;
 
 	/**
-	 * 修改岗位信息
+	 * 创建人
 	 */
-	public void modify(String name, String code, String description, UserId currentUserId) {
-		this.name = name;
-		this.code = code;
-		this.description = description;
-		this.markAsUpdated(currentUserId);
-	}
+	private UserId createdBy;
 
 	/**
-	 * 删除岗位
+	 * 创建时间
 	 */
-	public void delete(UserId currentUserId) {
-		this.markAsDeleted(currentUserId);
-	}
+	private Instant createdAt;
 }

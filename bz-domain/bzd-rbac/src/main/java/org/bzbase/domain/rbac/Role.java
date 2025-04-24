@@ -1,24 +1,41 @@
 package org.bzbase.domain.rbac;
 
+import java.time.Instant;
 import java.util.Set;
 
+import org.bzbase.domain.rbac.valueobject.GrantedPermission;
 import org.bzbase.domain.rbac.valueobject.RoleId;
-import org.bzbase.library.ddd.type.LifecycleAggregateRoot;
+import org.bzbase.library.ddd.type.AbstractAggregateRoot;
+import org.bzbase.primitive.organization.OrganizationId;
+import org.bzbase.primitive.tenant.TenantId;
 import org.bzbase.primitive.user.UserId;
 
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
-import lombok.experimental.SuperBuilder;
+import lombok.Setter;
 
 /**
  * 角色聚合根
  */
 @Getter
-@SuperBuilder(toBuilder = true)
-public class Role extends LifecycleAggregateRoot<RoleId> {
+@Setter
+@Builder(toBuilder = true)
+public class Role extends AbstractAggregateRoot<RoleId> {
 	/**
 	 * 角色ID
 	 */
 	private RoleId id;
+
+	/**
+	 * 租户ID
+	 */
+	private TenantId tenantId;
+
+	/**
+	 * 组织ID
+	 */
+	private OrganizationId organizationId;
 
 	/**
 	 * 父角色ID
@@ -43,76 +60,36 @@ public class Role extends LifecycleAggregateRoot<RoleId> {
 	/**
 	 * 角色拥有的权限
 	 */
-	private Set<String> permissions;
+	@Setter(AccessLevel.NONE)
+	private Set<GrantedPermission> permissions;
 
 	/**
-	 * 创建角色
-	 * 
-	 * @param id            角色ID
-	 * @param parentId      父角色ID
-	 * @param code          角色编码
-	 * @param name          角色名称
-	 * @param description   角色描述
-	 * @param currentUserId 当前用户ID
-	 * @return 角色
+	 * 创建人
 	 */
-	public static Role create(RoleId id, RoleId parentId, String code, String name, String description,
-			UserId currentUserId) {
-		Role role = Role.builder()
-				.id(id)
-				.parentId(parentId)
-				.code(code)
-				.name(name)
-				.description(description)
-				.build();
-		role.markAsCreated(currentUserId);
-		return role;
-	}
+	private UserId createdBy;
 
 	/**
-	 * 修改角色
-	 * 
-	 * @param parentId      父角色ID
-	 * @param name          角色名称
-	 * @param code          角色编码
-	 * @param description   角色描述
-	 * @param currentUserId 当前用户ID
+	 * 创建时间
 	 */
-	public void modify(RoleId parentId, String name, String code, String description, UserId currentUserId) {
-		this.parentId = parentId;
-		this.name = name;
-		this.code = code;
-		this.description = description;
-		this.markAsUpdated(currentUserId);
-	}
-
-	/**
-	 * 删除角色
-	 * 
-	 * @param currentUserId 当前用户ID
-	 */
-	public void delete(UserId currentUserId) {
-		this.markAsDeleted(currentUserId);
-	}
+	private Instant createdAt;
 
 	/**
 	 * 分配权限
 	 * 
-	 * @param permissions   权限编码集合
-	 * @param currentUserId 当前用户ID
+	 * @param permissions 授予的权限集合
 	 */
-	public void assignPermissions(Set<String> permissions, UserId currentUserId) {
+	public void assignPermissions(Set<GrantedPermission> permissions) {
 		this.permissions = permissions;
-		this.markAsUpdated(currentUserId);
 	}
 
 	/**
 	 * 判断是否有指定权限
 	 * 
-	 * @param permission 权限编码
+	 * @param permissionCode 权限编码
 	 * @return 是否有权限
 	 */
-	public boolean hasPermission(String permission) {
-		return permissions != null && permissions.contains(permission);
+	public boolean hasPermission(String permissionCode) {
+		return permissions != null && permissions.stream()
+				.anyMatch(permission -> permission.getPermissionCode().equals(permissionCode));
 	}
 }

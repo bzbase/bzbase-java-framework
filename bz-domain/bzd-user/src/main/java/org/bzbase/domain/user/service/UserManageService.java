@@ -1,12 +1,6 @@
 package org.bzbase.domain.user.service;
 
-import java.util.Set;
-
 import org.bzbase.domain.user.User;
-import org.bzbase.domain.user.valueobject.UserPoolId;
-import org.bzbase.domain.user.valueobject.UserProfile;
-import org.bzbase.domain.user.valueobject.Verifiable;
-import org.bzbase.library.security.identity.Identifier;
 import org.bzbase.primitive.user.UserId;
 
 /**
@@ -18,24 +12,21 @@ public interface UserManageService {
     /**
      * 创建用户
      * 
-     * @param userId 用户ID
-     * @param userPoolId 用户池ID
-     * @param userProfile 用户资料
+     * @param user 用户
      */
-    User createUser(UserPoolId userPoolId, UserProfile userProfile, Set<Verifiable<Identifier>> identifiers, UserId currentUserId);
+    User createUser(User user);
 
     /**
      * 修改用户
      * 
-     * @param userId 用户ID
-     * @param userProfile 用户资料
+     * @param user 用户
      */
-    User modifyUser(UserId userId, UserProfile userProfile, Set<Verifiable<Identifier>> identifiers, UserId currentUserId);
+    User modifyUser(User user);
 
     /**
      * 删除用户
      * 
      * @param userId 用户ID
      */
-    User deleteUser(UserId userId, UserId currentUserId);
+    User deleteUser(UserId userId);
 }

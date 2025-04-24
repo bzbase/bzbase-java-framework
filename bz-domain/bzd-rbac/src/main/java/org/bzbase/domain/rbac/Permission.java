@@ -1,15 +1,24 @@
 package org.bzbase.domain.rbac;
 
+import java.time.Instant;
+import java.util.List;
+
+import org.bzbase.domain.rbac.valueobject.DataScope;
 import org.bzbase.domain.rbac.valueobject.PermissionId;
-import org.bzbase.library.ddd.type.LifecycleAggregateRoot;
+import org.bzbase.library.ddd.type.AbstractAggregateRoot;
 import org.bzbase.primitive.user.UserId;
 
+import lombok.Builder;
 import lombok.Getter;
-import lombok.experimental.SuperBuilder;
+import lombok.Setter;
 
+/**
+ * 权限聚合根
+ */
 @Getter
-@SuperBuilder(toBuilder = true)
-public class Permission extends LifecycleAggregateRoot<PermissionId> {
+@Builder(toBuilder = true)
+@Setter
+public class Permission extends AbstractAggregateRoot<PermissionId> {
 	/**
 	 * 权限ID
 	 */
@@ -31,47 +40,31 @@ public class Permission extends LifecycleAggregateRoot<PermissionId> {
 	private String name;
 
 	/**
-	 * 创建权限
-	 * 
-	 * @param id            权限ID
-	 * @param parentId      父权限ID
-	 * @param code          权限编码
-	 * @param name          权限名称
-	 * @param currentUserId 当前用户ID
-	 * @return 权限
+	 * 排序
 	 */
-	public static Permission create(PermissionId id, PermissionId parentId, String code, String name, UserId currentUserId) {
-		Permission permission = Permission.builder()
-				.id(id)
-				.parentId(parentId)
-				.code(code)
-				.name(name)
-				.build();
-		permission.markAsCreated(currentUserId);
-		return permission;
-	}
+	private Integer sort;
 
 	/**
-	 * 修改权限
-	 * 
-	 * @param parentId      父权限ID
-	 * @param code          权限编码
-	 * @param name          权限名称
-	 * @param currentUserId 当前用户ID
+	 * 数据范围列表
 	 */
-	public void modify(PermissionId parentId, String code, String name, UserId currentUserId) {
-		this.parentId = parentId;
-		this.code = code;
-		this.name = name;
-		this.markAsUpdated(currentUserId);
-	}
+	private List<DataScope> dataScopes;
 
 	/**
-	 * 删除权限
-	 * 
-	 * @param userId 当前用户ID
+	 * 创建人
 	 */
-	public void delete(UserId userId) {
-		this.markAsDeleted(userId);
+	private UserId createdBy;
+
+	/**
+	 * 创建时间
+	 */
+	private Instant createdAt;
+
+	/**
+	 * 判断是否设置了权限范围
+	 * 
+	 * @return 是否设置了权限范围
+	 */
+	public boolean hasDataScope() {
+		return dataScopes != null && !dataScopes.isEmpty();
 	}
 }

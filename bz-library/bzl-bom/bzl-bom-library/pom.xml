@@ -20,6 +20,12 @@
                 <artifactId>bzl-ddd</artifactId>
                 <version>${bz.library.version}</version>
             </dependency>
+            <!-- bz pagination -->
+            <dependency>
+                <groupId>org.bzbase.library</groupId>
+                <artifactId>bzl-pagination</artifactId>
+                <version>${bz.library.version}</version>
+            </dependency>
             <!-- bz i18n -->
             <dependency>
                 <groupId>org.bzbase.library</groupId>

@@ -1,11 +1,10 @@
-package org.bzbase.library.ddd.type;
+package org.bzbase.library.persistence.common.type;
 
 import java.time.Instant;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
 /**
  * 实现DDD领域聚合根接口的包含生命周期的抽象聚合根，所有的聚合根类可以继承自此抽象类来获取通用实现
@@ -17,8 +16,7 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@SuperBuilder(toBuilder = true)
-public abstract class LifecycleAggregateRoot<I> extends AbstractAggregateRoot<I> {
+public abstract class LifecycleDataObject {
     /**
      * 创建时间
      */
@@ -77,15 +75,6 @@ public abstract class LifecycleAggregateRoot<I> extends AbstractAggregateRoot<I>
     }
 
     /**
-     * 标记为已创建
-     *
-     * @param currentUserId 当前用户ID
-     */
-    public void markAsCreated(AbstractId currentUserId) {
-        markAsCreated(currentUserId != null ? currentUserId.getValue() : null);
-    }
-
-    /**
      * 标记为已更新
      */
     public void markAsUpdated() {
@@ -100,15 +89,6 @@ public abstract class LifecycleAggregateRoot<I> extends AbstractAggregateRoot<I>
     public void markAsUpdated(String currentUserId) {
         this.updatedAt = Instant.now();
         this.updatedBy = currentUserId;
-    }
-
-    /**
-     * 标记为已更新
-     *
-     * @param currentUserId 当前用户ID
-     */
-    public void markAsUpdated(AbstractId currentUserId) {
-        markAsUpdated(currentUserId != null ? currentUserId.getValue() : null);
     }
 
     /**
@@ -128,14 +108,5 @@ public abstract class LifecycleAggregateRoot<I> extends AbstractAggregateRoot<I>
         this.deletedAt = Instant.now();
         this.deletedBy = currentUserId;
         this.deleted = true;
-    }
-
-    /**
-     * 标记为已删除
-     *
-     * @param currentUserId 当前用户ID
-     */
-    public void markAsDeleted(AbstractId currentUserId) {
-        markAsDeleted(currentUserId != null ? currentUserId.getValue() : null);
     }
 }

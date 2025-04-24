@@ -1,6 +1,7 @@
 package org.bzbase.domain.rbac.infrastructure;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.bzbase.domain.rbac.Permission;
 import org.bzbase.domain.rbac.valueobject.PermissionId;
@@ -40,4 +41,12 @@ public interface PermissionRepository extends Repository<Permission, PermissionI
 	 * @return 是否存在
 	 */
 	boolean existsByParentId(PermissionId parentId);
+
+	/**
+	 * 根据权限编码查询权限
+	 * 
+	 * @param code 权限编码
+	 * @return 权限
+	 */
+	Optional<Permission> findByCode(String code);
 }

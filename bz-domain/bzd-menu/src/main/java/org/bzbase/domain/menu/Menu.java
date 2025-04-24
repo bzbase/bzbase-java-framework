@@ -1,18 +1,21 @@
 package org.bzbase.domain.menu;
 
+import java.time.Instant;
 import java.util.Set;
 
 import org.bzbase.domain.menu.valueobject.MenuCategoryId;
 import org.bzbase.domain.menu.valueobject.MenuId;
-import org.bzbase.library.ddd.type.LifecycleAggregateRoot;
+import org.bzbase.library.ddd.type.AbstractAggregateRoot;
 import org.bzbase.primitive.user.UserId;
 
+import lombok.Builder;
 import lombok.Getter;
-import lombok.experimental.SuperBuilder;
+import lombok.Setter;
 
 @Getter
-@SuperBuilder(toBuilder = true)
-public class Menu extends LifecycleAggregateRoot<MenuId> {
+@Builder(toBuilder = true)
+@Setter
+public class Menu extends AbstractAggregateRoot<MenuId> {
 	/**
 	 * 菜单ID
 	 */
@@ -61,46 +64,15 @@ public class Menu extends LifecycleAggregateRoot<MenuId> {
 	/**
 	 * 是否可见
 	 */
-	private Boolean visible;
+	private boolean visible;
 
 	/**
-	 * 创建菜单
-	 * 
-	 * @param menuBuilder 菜单构建器
-	 * @param currentUserId 当前用户ID
-	 * @return 菜单
+	 * 创建人
 	 */
-	public static Menu create(Menu.MenuBuilder menuBuilder, UserId currentUserId) {
-		Menu menu = menuBuilder.build();
-		menu.markAsCreated(currentUserId);
-		return menu;
-	}
+	private UserId createdBy;
 
 	/**
-	 * 修改菜单
-	 * 
-	 * @param menuBuilder 菜单构建器
-	 * @param currentUserId 当前用户ID
-	 * @return 菜单
+	 * 创建时间
 	 */
-	public void modify(Menu.MenuBuilder menuBuilder, UserId currentUserId) {
-		this.categoryId = menuBuilder.categoryId;
-		this.name = menuBuilder.name;
-		this.parentId = menuBuilder.parentId;
-		this.path = menuBuilder.path;
-		this.icon = menuBuilder.icon;
-		this.permissions = menuBuilder.permissions;
-		this.sort = menuBuilder.sort;
-		this.visible = menuBuilder.visible;
-		this.markAsUpdated(currentUserId);
-	}
-
-	/**
-	 * 删除菜单
-	 * 
-	 * @param currentUserId 当前用户ID
-	 */
-	public void delete(UserId currentUserId) {
-		this.markAsDeleted(currentUserId);
-	}
+	private Instant createdAt;
 }

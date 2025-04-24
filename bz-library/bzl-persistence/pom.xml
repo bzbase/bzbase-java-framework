@@ -16,6 +16,7 @@
         <module>bzl-persistence-mybatis</module>
         <module>bzl-persistence-mybatis-plus</module>
         <module>bzl-persistence-test</module>
+        <module>bzl-persistence-common</module>
     </modules>
 
 </project>

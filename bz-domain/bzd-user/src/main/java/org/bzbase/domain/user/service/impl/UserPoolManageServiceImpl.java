@@ -1,12 +1,13 @@
 package org.bzbase.domain.user.service.impl;
 
+import java.time.Instant;
+
 import org.bzbase.domain.user.UserPool;
 import org.bzbase.domain.user.infrastructure.UserPoolRepository;
 import org.bzbase.domain.user.service.UserPoolManageService;
 import org.bzbase.domain.user.valueobject.UserPoolId;
 import org.bzbase.library.ddd.exception.DomainException;
 import org.bzbase.library.ddd.type.IdGenerator;
-import org.bzbase.primitive.user.UserId;
 
 import lombok.RequiredArgsConstructor;
 
@@ -21,28 +22,38 @@ public class UserPoolManageServiceImpl implements UserPoolManageService {
 	private final UserPoolRepository userPoolRepository;
 
 	@Override
-	public UserPool createUserPool(String name, String code, UserId currentUserId) {
-		if (userPoolRepository.existsByCode(code)) {
+	public UserPool createUserPool(UserPool userPool) {
+		if (userPoolRepository.existsByCode(userPool.getCode())) {
 			throw new DomainException("用户池编码已存在");
 		}
-		return UserPool.create(new UserPoolId(idGenerator.generate()), name, code, currentUserId);
-	}
 
-	@Override
-	public UserPool modifyUserPool(UserPoolId id, String name, String code, UserId currentUserId) {
-		UserPool userPool = userPoolRepository.findById(id).orElseThrow(() -> new DomainException("指定用户池不存在"));
-		boolean isCodeChanged = !userPool.getCode().equals(code);
-		if (isCodeChanged && userPoolRepository.existsByCode(code)) {
-			throw new DomainException("用户池编码已存在");
+		if (userPool.getId() == null) {
+			userPool.setId(new UserPoolId(idGenerator.generate()));
 		}
-		userPool.modify(name, code, currentUserId);
+		userPool.setCreatedAt(Instant.now());
+
 		return userPool;
 	}
 
 	@Override
-	public UserPool deleteUserPool(UserPoolId id, UserId currentUserId) {
-		UserPool userPool = userPoolRepository.findById(id).orElseThrow(() -> new DomainException("指定用户池不存在"));
-		userPool.markAsDeleted(currentUserId);
+	public UserPool modifyUserPool(UserPool userPool) {
+		UserPool oldUserPool = getUserPoolById(userPool.getId());
+
+		boolean isCodeChanged = !oldUserPool.getCode().equals(userPool.getCode());
+		if (isCodeChanged && userPoolRepository.existsByCode(userPool.getCode())) {
+			throw new DomainException("用户池编码已存在");
+		}
+
 		return userPool;
+	}
+
+	@Override
+	public UserPool deleteUserPool(UserPoolId id) {
+		UserPool userPool = getUserPoolById(id);
+		return userPool;
+	}
+
+	private UserPool getUserPoolById(UserPoolId id) {
+		return userPoolRepository.findById(id).orElseThrow(() -> new DomainException("指定用户池不存在"));
 	}
 }

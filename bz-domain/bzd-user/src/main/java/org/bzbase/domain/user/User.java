@@ -14,7 +14,7 @@ import org.bzbase.domain.user.valueobject.UserProfile;
 import org.bzbase.domain.user.valueobject.UserStatus;
 import org.bzbase.domain.user.valueobject.Verifiable;
 import org.bzbase.library.ddd.exception.DomainException;
-import org.bzbase.library.ddd.type.LifecycleAggregateRoot;
+import org.bzbase.library.ddd.type.AbstractAggregateRoot;
 import org.bzbase.library.security.identity.Identifier;
 import org.bzbase.primitive.password.HashedPassword;
 import org.bzbase.primitive.password.PlainPassword;
@@ -23,7 +23,6 @@ import org.bzbase.primitive.user.UserId;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.experimental.SuperBuilder;
 
 /**
  * 用户聚合根
@@ -31,8 +30,8 @@ import lombok.experimental.SuperBuilder;
  * @author legendjw
  */
 @Getter
-@SuperBuilder(toBuilder = true)
-public class User extends LifecycleAggregateRoot<UserId> {
+@Builder(toBuilder = true)
+public class User extends AbstractAggregateRoot<UserId> {
     /**
      * 用户id
      */
@@ -72,6 +71,11 @@ public class User extends LifecycleAggregateRoot<UserId> {
     private UserStatus status;
 
     /**
+     * 创建时间
+     */
+    private Instant createdAt;
+
+    /**
      * 状态最后修改时间
      */
     private Instant lastStatusChangedAt;
@@ -90,45 +94,6 @@ public class User extends LifecycleAggregateRoot<UserId> {
      * 最后登录时间
      */
     private Instant lastLoginAt;
-
-    /**
-     * 创建用户
-     *
-     * @param userId  用户id
-     * @param poolId  用户池id
-     * @param profile 用户信息
-     * @return 用户
-     */
-    public static User create(UserId userId, UserPoolId poolId, UserProfile profile) {
-        User user = User.builder()
-                .id(userId)
-                .poolId(poolId)
-                .profile(profile)
-                .status(UserStatus.ACTIVE)
-                .build();
-        user.markAsCreated();
-        return user;
-    }
-
-    /**
-     * 创建用户
-     *
-     * @param userId  用户id
-     * @param poolId  用户池id
-     * @param profile 用户信息
-     * @param currentUserId 当前用户id
-     * @return 用户
-     */
-    public static User create(UserId userId, UserPoolId poolId, UserProfile profile, UserId currentUserId) {
-        User user = User.builder()
-                .id(userId)
-                .poolId(poolId)
-                .profile(profile)
-                .status(UserStatus.ACTIVE)
-                .build();
-        user.markAsCreated(currentUserId);
-        return user;
-    }
 
     /**
      * 绑定本地身份标识
@@ -229,7 +194,6 @@ public class User extends LifecycleAggregateRoot<UserId> {
      */
     public void modifyProfile(UserProfile userProfile) {
         this.profile = userProfile;
-        this.markAsUpdated();
     }
 
     /**
@@ -240,7 +204,6 @@ public class User extends LifecycleAggregateRoot<UserId> {
      */
     public void modifyProfile(UserProfile userProfile, UserId currentUserId) {
         this.profile = userProfile;
-        this.markAsUpdated(currentUserId);
     }
 
     /**
@@ -306,7 +269,6 @@ public class User extends LifecycleAggregateRoot<UserId> {
         this.status = UserStatus.DEACTIVATED;
         this.statusChangeReason = reason;
         this.lastStatusChangedAt = Instant.now().truncatedTo(ChronoUnit.SECONDS);
-        this.markAsDeleted();
     }
 
     /**

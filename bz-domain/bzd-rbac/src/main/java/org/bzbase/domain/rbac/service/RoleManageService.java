@@ -4,7 +4,7 @@ import java.util.Set;
 
 import org.bzbase.domain.rbac.Role;
 import org.bzbase.domain.rbac.valueobject.RoleId;
-import org.bzbase.primitive.user.UserId;
+import org.bzbase.domain.rbac.valueobject.GrantedPermission;
 
 /**
  * 角色管理服务
@@ -13,43 +13,33 @@ public interface RoleManageService {
 	/**
 	 * 创建角色
 	 *
-	 * @param parentId    父角色ID
-	 * @param code        角色编码
-	 * @param name        角色名称
-	 * @param description 角色描述
-	 * @param currentUserId 当前用户ID
+	 * @param role 角色
 	 * @return 角色
 	 */
-	Role createRole(RoleId parentId, String code, String name, String description, UserId currentUserId);
+	Role createRole(Role role);
 
 	/**
 	 * 修改角色
 	 *
-	 * @param id          角色ID
-	 * @param parentId    父角色ID
-	 * @param code        角色编码
-	 * @param name        角色名称
-	 * @param description 角色描述
-	 * @param currentUserId 当前用户ID
+	 * @param role 角色
 	 * @return 角色
 	 */
-	Role modifyRole(RoleId id, RoleId parentId, String code, String name, String description, UserId currentUserId);
+	Role modifyRole(Role role);
 
 	/**
 	 * 删除角色
 	 *
-	 * @param id             角色ID
-	 * @param currentUserId 当前用户ID
+	 * @param id 角色ID
 	 * @return 角色
 	 */
-	Role deleteRole(RoleId id, UserId currentUserId);
+	Role deleteRole(RoleId id);
 
 	/**
 	 * 分配权限
 	 * 
-	 * @param id             角色ID
-	 * @param permissions    权限
-	 * @param currentUserId 当前用户ID
+	 * @param id          角色ID
+	 * @param permissions 授予的权限集合
+	 * @return 角色
 	 */
-	Role assignPermissions(RoleId id, Set<String> permissions, UserId currentUserId);
+	Role assignPermissions(RoleId id, Set<GrantedPermission> permissions);
 }

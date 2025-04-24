@@ -5,9 +5,7 @@ import java.util.List;
 
 import org.bzbase.library.ddd.event.DomainEvent;
 
-import lombok.Builder;
 import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
 
 /**
  * 实现DDD领域聚合根接口的抽象聚合根，所有的聚合根类可以继承自此抽象类来获取通用实现
@@ -17,12 +15,10 @@ import lombok.experimental.SuperBuilder;
  * @author legendjw
  */
 @NoArgsConstructor
-@SuperBuilder(toBuilder = true)
 public abstract class AbstractAggregateRoot<I> extends AbstractEntity<I> implements AggregateRoot<I> {
     /**
      * 领域事件
      */
-    @Builder.Default
     protected final List<DomainEvent> domainEvents = new ArrayList<>();
 
     /**

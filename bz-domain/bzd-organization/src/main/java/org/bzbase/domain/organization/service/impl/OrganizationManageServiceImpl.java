@@ -1,12 +1,13 @@
 package org.bzbase.domain.organization.service.impl;
 
+import java.time.Instant;
+
 import org.bzbase.domain.organization.Organization;
 import org.bzbase.domain.organization.infrastructure.OrganizationRepository;
 import org.bzbase.domain.organization.service.OrganizationManageService;
-import org.bzbase.domain.organization.valueobject.OrganizationId;
 import org.bzbase.library.ddd.exception.DomainException;
 import org.bzbase.library.ddd.type.IdGenerator;
-import org.bzbase.primitive.user.UserId;
+import org.bzbase.primitive.organization.OrganizationId;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,57 +20,57 @@ public class OrganizationManageServiceImpl implements OrganizationManageService 
     private final OrganizationRepository organizationRepository;
 
     @Override
-    public Organization createOrganization(String name, String shortName, UserId currentUserId) {
-        if (organizationRepository.existsByName(name)) {
+    public Organization createOrganization(Organization organization) {
+        if (organizationRepository.existsByName(organization.getTenantId(), organization.getName())) {
             throw new DomainException("组织名称已经存在");
         }
 
-        OrganizationId organizationId = new OrganizationId(idGenerator.generate());
-        return Organization.create(organizationId, name, shortName, currentUserId);
+        if (organization.getId() == null) {
+            organization.setId(new OrganizationId(idGenerator.generate()));
+        }
+        organization.setCreatedAt(Instant.now());
+
+        return organization;
     }
 
     @Override
-    public Organization modifyOrganization(OrganizationId id, String name, String shortName, UserId currentUserId) {
-        Organization organization = organizationRepository.findById(id)
-                .orElseThrow(() -> new DomainException("指定的组织不存在"));
+    public Organization modifyOrganization(Organization organization) {
+        Organization oldOrganization = getOrganizationById(organization.getId());
 
-        boolean isNameChanged = !organization.getName().equals(name);
-        if (isNameChanged && organizationRepository.existsByName(name)) {
+        boolean isNameChanged = !organization.getName().equals(oldOrganization.getName());
+        if (isNameChanged && organizationRepository.existsByName(organization.getTenantId(), organization.getName())) {
             throw new DomainException("组织名称已经存在");
         }
 
-        organization.modify(name, shortName, currentUserId);
+        return organization;
+    }
+
+    @Override
+    public Organization deleteOrganization(OrganizationId id) {
+        Organization organization = getOrganizationById(id);
 
         return organization;
     }
 
     @Override
-    public Organization deleteOrganization(OrganizationId id, UserId currentUserId) {
-        Organization organization = organizationRepository.findById(id)
-                .orElseThrow(() -> new DomainException("指定的组织不存在"));
+    public Organization enableOrganization(OrganizationId id) {
+        Organization organization = getOrganizationById(id);
 
-        organization.delete(currentUserId);
-
-        return organization;
-    }
-
-    @Override
-    public Organization enableOrganization(OrganizationId id, UserId currentUserId) {
-        Organization organization = organizationRepository.findById(id)
-                .orElseThrow(() -> new DomainException("指定的组织不存在"));
-
-        organization.enable(currentUserId);
+        organization.enable();
 
         return organization;
     }
 
     @Override
-    public Organization disableOrganization(OrganizationId id, UserId currentUserId) {
-        Organization organization = organizationRepository.findById(id)
-                .orElseThrow(() -> new DomainException("指定的组织不存在"));
+    public Organization disableOrganization(OrganizationId id) {
+        Organization organization = getOrganizationById(id);
 
-        organization.disable(currentUserId);
+        organization.disable();
 
         return organization;
+    }
+
+    public Organization getOrganizationById(OrganizationId id) {
+        return organizationRepository.findById(id).orElseThrow(() -> new DomainException("指定的组织不存在"));
     }
 }

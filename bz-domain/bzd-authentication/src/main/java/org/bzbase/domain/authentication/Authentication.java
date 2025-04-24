@@ -14,8 +14,8 @@ import org.bzbase.library.security.identity.ClaimIdentity;
 import org.bzbase.library.security.identity.Identifier;
 import org.bzbase.library.security.identity.Identity;
 
+import lombok.Builder;
 import lombok.Getter;
-import lombok.experimental.SuperBuilder;
 
 /**
  * 身份认证聚合根，表示一次身份认证的过程。
@@ -23,7 +23,7 @@ import lombok.experimental.SuperBuilder;
  * @author legendjw
  */
 @Getter
-@SuperBuilder(toBuilder = true)
+@Builder(toBuilder = true)
 public class Authentication extends AbstractAggregateRoot<AuthenticationId> {
     /**
      * 认证ID
