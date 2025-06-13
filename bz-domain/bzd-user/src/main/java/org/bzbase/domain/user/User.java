@@ -23,6 +23,7 @@ import org.bzbase.primitive.user.UserId;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 用户聚合根
@@ -30,6 +31,7 @@ import lombok.Getter;
  * @author legendjw
  */
 @Getter
+@Setter
 @Builder(toBuilder = true)
 public class User extends AbstractAggregateRoot<UserId> {
     /**

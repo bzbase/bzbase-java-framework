@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.bzbase.domain.user.User;
 import org.bzbase.domain.user.infrastructure.UserRepository;
 import org.bzbase.domain.user.service.UserManageService;
+import org.bzbase.domain.user.valueobject.UserStatus;
 import org.bzbase.domain.user.valueobject.Verifiable;
 import org.bzbase.library.ddd.exception.DomainException;
 import org.bzbase.library.ddd.type.IdGenerator;
@@ -26,6 +27,12 @@ public class UserManageServiceImpl implements UserManageService {
 
     @Override
     public User createUser(User user) {
+        if (user.getId() == null) {
+            user.setId(new UserId(idGenerator.generate()));
+        }
+        user.setCreatedAt(Instant.now());
+        user.setStatus(UserStatus.ACTIVE);
+
         // 验证用户身份
         for (Verifiable<Identifier> verifiable : user.getIdentifiers()) {
             Identifier identifier = verifiable.getValue();
