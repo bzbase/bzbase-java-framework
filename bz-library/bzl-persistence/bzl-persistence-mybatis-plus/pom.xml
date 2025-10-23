@@ -12,7 +12,7 @@
     <artifactId>bzl-persistence-mybatis-plus</artifactId>
 
     <properties>
-        <bz.library.version>1.1-SNAPSHOT</bz.library.version>
+        <bz.library.version>1.2-SNAPSHOT</bz.library.version>
     </properties>
 
     <dependencyManagement>

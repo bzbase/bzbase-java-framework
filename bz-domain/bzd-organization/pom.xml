@@ -42,5 +42,10 @@
             <artifactId>bzp-tenant</artifactId>
             <version>${bz.primitive.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.bzbase.primitive</groupId>
+            <artifactId>bzp-enterprise</artifactId>
+            <version>${bz.primitive.version}</version>
+        </dependency>
     </dependencies>
 </project>
