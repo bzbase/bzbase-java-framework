@@ -1,25 +1,19 @@
 package org.bzbase.domain.organization;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
-
-import org.bzbase.domain.organization.valueobject.EmergencyContact;
-import org.bzbase.domain.organization.valueobject.EmployeeBasicInfo;
-import org.bzbase.domain.organization.valueobject.EmployeeCredentialInfo;
-import org.bzbase.domain.organization.valueobject.EmployeeId;
-import org.bzbase.domain.organization.valueobject.EmployeeJobInfo;
-import org.bzbase.domain.organization.valueobject.EmployeeStatus;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import org.bzbase.domain.organization.valueobject.*;
 import org.bzbase.library.ddd.exception.DomainException;
 import org.bzbase.library.ddd.type.AbstractAggregateRoot;
 import org.bzbase.primitive.organization.OrganizationId;
 import org.bzbase.primitive.tenant.TenantId;
 import org.bzbase.primitive.user.UserId;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 员工聚合根

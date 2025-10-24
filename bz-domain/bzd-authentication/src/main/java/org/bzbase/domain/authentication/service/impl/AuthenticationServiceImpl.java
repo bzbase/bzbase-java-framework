@@ -1,5 +1,6 @@
 package org.bzbase.domain.authentication.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.bzbase.domain.authentication.Authentication;
 import org.bzbase.domain.authentication.authenticator.AuthenticationException;
 import org.bzbase.domain.authentication.authenticator.Authenticator;
@@ -10,8 +11,6 @@ import org.bzbase.domain.authentication.valueobject.FailureMessage;
 import org.bzbase.library.ddd.type.IdGenerator;
 import org.bzbase.library.security.identity.Credentials;
 import org.bzbase.library.security.identity.Identity;
-
-import lombok.RequiredArgsConstructor;
 
 /**
  * 认证领域服务默认实现

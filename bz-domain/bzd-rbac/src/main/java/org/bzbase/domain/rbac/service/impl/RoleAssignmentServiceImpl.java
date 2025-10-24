@@ -1,15 +1,6 @@
 package org.bzbase.domain.rbac.service.impl;
 
-import java.time.Instant;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
-
+import lombok.RequiredArgsConstructor;
 import org.bzbase.domain.rbac.Permission;
 import org.bzbase.domain.rbac.Role;
 import org.bzbase.domain.rbac.RoleAssignment;
@@ -17,18 +8,14 @@ import org.bzbase.domain.rbac.infrastructure.PermissionRepository;
 import org.bzbase.domain.rbac.infrastructure.RoleAssignmentRepository;
 import org.bzbase.domain.rbac.infrastructure.RoleRepository;
 import org.bzbase.domain.rbac.service.RoleAssignmentService;
-import org.bzbase.domain.rbac.valueobject.DataScope;
-import org.bzbase.domain.rbac.valueobject.GrantedPermission;
-import org.bzbase.domain.rbac.valueobject.RoleAssignmentId;
-import org.bzbase.domain.rbac.valueobject.RoleId;
-import org.bzbase.domain.rbac.valueobject.Subject;
+import org.bzbase.domain.rbac.valueobject.*;
 import org.bzbase.library.ddd.exception.DomainException;
 import org.bzbase.library.ddd.type.IdGenerator;
-import org.bzbase.primitive.organization.OrganizationId;
-import org.bzbase.primitive.tenant.TenantId;
 import org.bzbase.primitive.user.UserId;
 
-import lombok.RequiredArgsConstructor;
+import java.time.Instant;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * 角色分配服务实现
@@ -43,21 +30,18 @@ public class RoleAssignmentServiceImpl implements RoleAssignmentService {
 	private final RoleAssignmentRepository roleAssignmentRepository;
 
 	@Override
-	public Set<Role> getAssignedRoles(TenantId tenantId, OrganizationId organizationId, Subject subject) {
-		RoleAssignment roleAssignment = roleAssignmentRepository.findBySubject(tenantId, organizationId, subject)
-				.orElse(null);
+	public Set<Role> getAssignedRoles(Subject subject) {
+		RoleAssignment roleAssignment = roleAssignmentRepository.findBySubject(subject).orElse(null);
 		if (roleAssignment == null || roleAssignment.getRoleIds() == null || roleAssignment.getRoleIds().isEmpty()) {
 			return Collections.emptySet();
 		}
 
-		return roleRepository.findByIds(tenantId, organizationId, roleAssignment.getRoleIds()).stream()
-				.collect(Collectors.toSet());
+		return new HashSet<>(roleRepository.findByIds(roleAssignment.getRoleIds()));
 	}
 
 	@Override
-	public Set<GrantedPermission> getGrantedPermissions(TenantId tenantId, OrganizationId organizationId,
-			Subject subject) {
-		Set<Role> roles = getAssignedRoles(tenantId, organizationId, subject);
+	public Set<GrantedPermission> getGrantedPermissions(Subject subject) {
+		Set<Role> roles = getAssignedRoles(subject);
 		if (roles.isEmpty()) {
 			return Collections.emptySet();
 		}
@@ -125,17 +109,15 @@ public class RoleAssignmentServiceImpl implements RoleAssignmentService {
 	}
 
 	@Override
-	public RoleAssignment assignRoles(TenantId tenantId, OrganizationId organizationId, Subject subject,
-			Set<RoleId> roleIds, UserId operatedBy) {
+	public RoleAssignment assignRoles(Subject subject, Set<RoleId> roleIds, UserId operatedBy) {
 		// 验证角色是否存在
-		List<Role> roles = roleRepository.findByIds(tenantId, organizationId, roleIds);
+		List<Role> roles = roleRepository.findByIds(roleIds);
 		if (roles.size() != roleIds.size()) {
 			throw new DomainException("授权的角色错误");
 		}
 
 		// 查找现有的角色分配
-		Optional<RoleAssignment> existingAssignment = roleAssignmentRepository.findBySubject(tenantId, organizationId,
-				subject);
+		Optional<RoleAssignment> existingAssignment = roleAssignmentRepository.findBySubject(subject);
 
 		// 如果存在，则更新角色
 		if (existingAssignment.isPresent()) {
@@ -146,8 +128,6 @@ public class RoleAssignmentServiceImpl implements RoleAssignmentService {
 			// 如果不存在，则创建新的角色分配
 			return RoleAssignment.builder()
 					.id(new RoleAssignmentId(idGenerator.generate()))
-					.tenantId(tenantId)
-					.organizationId(organizationId)
 					.subject(subject)
 					.roleIds(roleIds)
 					.operatedBy(operatedBy)
@@ -157,10 +137,8 @@ public class RoleAssignmentServiceImpl implements RoleAssignmentService {
 	}
 
 	@Override
-	public RoleAssignment revokeAssignment(TenantId tenantId, OrganizationId organizationId, Subject subject,
-			UserId operatedBy) {
-		Optional<RoleAssignment> roleAssignmentOptional = roleAssignmentRepository.findBySubject(tenantId,
-				organizationId, subject);
+	public RoleAssignment revokeAssignment(Subject subject, UserId operatedBy) {
+		Optional<RoleAssignment> roleAssignmentOptional = roleAssignmentRepository.findBySubject(subject);
 		if (!roleAssignmentOptional.isPresent()) {
 			throw new DomainException("此主体下没有任何角色分配");
 		}

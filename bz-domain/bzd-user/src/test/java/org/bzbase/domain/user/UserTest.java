@@ -1,9 +1,5 @@
 package org.bzbase.domain.user;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.time.LocalDate;
-
 import org.bzbase.domain.authentication.factor.AuthenticationFactorType;
 import org.bzbase.domain.user.authentication.factor.PasswordFactor;
 import org.bzbase.domain.user.authentication.identity.UsernameIdentifier;
@@ -18,12 +14,12 @@ import org.bzbase.primitive.password.hasher.PasswordHasher;
 import org.bzbase.primitive.person.Birthdate;
 import org.bzbase.primitive.person.Gender;
 import org.bzbase.primitive.person.Name;
-import org.bzbase.primitive.user.Nickname;
-import org.bzbase.primitive.user.Picture;
-import org.bzbase.primitive.user.PreferredUsername;
-import org.bzbase.primitive.user.UserId;
-import org.bzbase.primitive.user.Username;
+import org.bzbase.primitive.user.*;
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * 用户测试

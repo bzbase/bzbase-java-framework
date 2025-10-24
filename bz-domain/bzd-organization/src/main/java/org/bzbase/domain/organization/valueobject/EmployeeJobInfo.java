@@ -1,11 +1,11 @@
 package org.bzbase.domain.organization.valueobject;
 
-import java.time.LocalDate;
-import java.util.List;
-
 import lombok.Builder;
 import lombok.Value;
 import lombok.With;
+
+import java.time.LocalDate;
+import java.util.List;
 
 /**
  * 员工工作信息值对象

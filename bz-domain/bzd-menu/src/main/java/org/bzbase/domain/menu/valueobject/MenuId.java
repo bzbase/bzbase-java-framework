@@ -1,8 +1,7 @@
 package org.bzbase.domain.menu.valueobject;
 
-import org.bzbase.library.ddd.type.AbstractId;
-
 import lombok.EqualsAndHashCode;
+import org.bzbase.library.ddd.type.AbstractId;
 
 /**
  * 菜单聚合根唯一标识

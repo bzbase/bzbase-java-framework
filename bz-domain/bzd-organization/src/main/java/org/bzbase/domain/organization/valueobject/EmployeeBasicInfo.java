@@ -1,14 +1,13 @@
 package org.bzbase.domain.organization.valueobject;
 
+import lombok.Builder;
+import lombok.Value;
+import lombok.With;
 import org.bzbase.primitive.emailaddress.EmailAddress;
 import org.bzbase.primitive.person.Birthdate;
 import org.bzbase.primitive.person.Gender;
 import org.bzbase.primitive.phonenumber.PhoneNumber;
 import org.bzbase.primitive.user.Picture;
-
-import lombok.Builder;
-import lombok.Value;
-import lombok.With;
 
 /**
  * 员工基本信息值对象

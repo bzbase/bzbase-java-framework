@@ -1,5 +1,6 @@
 package org.bzbase.domain.user.service;
 
+import lombok.NonNull;
 import org.bzbase.domain.user.User;
 import org.bzbase.domain.user.valueobject.UserPoolId;
 import org.bzbase.domain.user.valueobject.UserProfile;
@@ -9,8 +10,6 @@ import org.bzbase.primitive.emailaddress.EmailAddress;
 import org.bzbase.primitive.password.PlainPassword;
 import org.bzbase.primitive.phonenumber.PhoneNumber;
 import org.bzbase.primitive.user.Username;
-
-import lombok.NonNull;
 
 /**
  * 用户注册领域服务

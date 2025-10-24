@@ -1,8 +1,8 @@
 package org.bzbase.domain.user.service;
 
-import org.bzbase.primitive.user.UserId;
 import org.bzbase.domain.user.User;
 import org.bzbase.primitive.password.PlainPassword;
+import org.bzbase.primitive.user.UserId;
 
 /**
  * 用户密码修改领域服务

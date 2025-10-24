@@ -1,16 +1,16 @@
 package org.bzbase.domain.organization;
 
-import java.time.Instant;
-
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 import org.bzbase.domain.organization.valueobject.OrganizationStatus;
 import org.bzbase.library.ddd.type.AbstractAggregateRoot;
+import org.bzbase.primitive.enterprise.EnterpriseProfile;
 import org.bzbase.primitive.organization.OrganizationId;
 import org.bzbase.primitive.tenant.TenantId;
 import org.bzbase.primitive.user.UserId;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import java.time.Instant;
 
 /**
  * 组织聚合根
@@ -35,9 +35,14 @@ public class Organization extends AbstractAggregateRoot<OrganizationId> {
     private String name;
 
     /**
-     * 组织简称
+     * 组织logo
      */
-    private String shortName;
+    private String logoUrl;
+
+    /**
+     * 企业档案，可为空
+     */
+    private EnterpriseProfile enterpriseProfile;
 
     /**
      * 组织状态

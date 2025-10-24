@@ -1,10 +1,10 @@
 package org.bzbase.domain.rbac.service;
 
-import java.util.Set;
-
 import org.bzbase.domain.rbac.Role;
-import org.bzbase.domain.rbac.valueobject.RoleId;
 import org.bzbase.domain.rbac.valueobject.GrantedPermission;
+import org.bzbase.domain.rbac.valueobject.RoleId;
+
+import java.util.Set;
 
 /**
  * 角色管理服务

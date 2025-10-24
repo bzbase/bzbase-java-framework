@@ -1,12 +1,11 @@
 package org.bzbase.domain.authentication.authenticator;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.bzbase.library.security.identity.Credentials;
-
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.bzbase.library.security.identity.Credentials;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 认证请求服务管理器

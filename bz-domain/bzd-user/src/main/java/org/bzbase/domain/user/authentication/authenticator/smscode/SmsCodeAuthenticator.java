@@ -1,8 +1,6 @@
 package org.bzbase.domain.user.authentication.authenticator.smscode;
 
-import java.util.HashSet;
-import java.util.Set;
-
+import lombok.AllArgsConstructor;
 import org.bzbase.domain.authentication.authenticator.AuthenticationException;
 import org.bzbase.domain.authentication.authenticator.Authenticator;
 import org.bzbase.domain.user.infrastructure.SMSCodeVerifyService;
@@ -12,7 +10,8 @@ import org.bzbase.library.security.identity.ClaimIdentity;
 import org.bzbase.library.security.identity.Credentials;
 import org.bzbase.library.security.identity.Identity;
 
-import lombok.AllArgsConstructor;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 短信验证码认证器

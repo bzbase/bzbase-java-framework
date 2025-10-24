@@ -1,5 +1,7 @@
 package org.bzbase.domain.user.service.impl;
 
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import org.bzbase.domain.user.User;
 import org.bzbase.domain.user.UserPool;
 import org.bzbase.domain.user.authentication.factor.PasswordFactor;
@@ -23,9 +25,6 @@ import org.bzbase.primitive.password.hasher.PasswordHasher;
 import org.bzbase.primitive.phonenumber.PhoneNumber;
 import org.bzbase.primitive.user.UserId;
 import org.bzbase.primitive.user.Username;
-
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 
 /**
  * 用户注册领域服务默认实现

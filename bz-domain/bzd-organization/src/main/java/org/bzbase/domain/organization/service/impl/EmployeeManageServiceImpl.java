@@ -1,9 +1,6 @@
 package org.bzbase.domain.organization.service.impl;
 
-import java.time.Instant;
-import java.time.LocalDate;
-import java.util.Objects;
-
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.bzbase.domain.organization.Employee;
 import org.bzbase.domain.organization.infrastructure.EmployeeRepository;
@@ -13,7 +10,9 @@ import org.bzbase.domain.organization.valueobject.EmployeeStatus;
 import org.bzbase.library.ddd.exception.DomainException;
 import org.bzbase.library.ddd.type.IdGenerator;
 
-import lombok.RequiredArgsConstructor;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * 员工管理服务实现类
@@ -26,27 +25,23 @@ public class EmployeeManageServiceImpl implements EmployeeManageService {
     @Override
     public Employee createEmployee(Employee employee) {
         if (employee.getBasicInfo().getPhoneNumber() != null
-                && employeeRepository.existsByPhoneNumber(employee.getTenantId(), employee.getOrganizationId(),
-                        employee.getBasicInfo().getPhoneNumber())) {
+                && employeeRepository.existsByPhoneNumber(employee.getBasicInfo().getPhoneNumber())) {
             throw new DomainException("手机号码已经存在");
         }
 
         if (employee.getBasicInfo().getEmailAddress() != null
-                && employeeRepository.existsByEmailAddress(employee.getTenantId(), employee.getOrganizationId(),
-                        employee.getBasicInfo().getEmailAddress())) {
+                && employeeRepository.existsByEmailAddress(employee.getBasicInfo().getEmailAddress())) {
             throw new DomainException("邮箱地址已经存在");
         }
 
         if (StringUtils.isNotBlank(employee.getJobInfo().getNumber())
-                && employeeRepository.existsByEmployeeNumber(employee.getTenantId(), employee.getOrganizationId(),
-                        employee.getJobInfo().getNumber())) {
+                && employeeRepository.existsByEmployeeNumber(employee.getJobInfo().getNumber())) {
             throw new DomainException("工号已经存在");
         }
 
         if (employee.getCredentialInfo().getIdCard() != null
                 && employee.getCredentialInfo().getIdCard().getIdNumber() != null
-                && employeeRepository.existsByIdNumber(employee.getTenantId(), employee.getOrganizationId(),
-                        employee.getCredentialInfo().getIdCard().getIdNumber())) {
+                && employeeRepository.existsByIdNumber(employee.getCredentialInfo().getIdCard().getIdNumber())) {
             throw new DomainException("身份证号码已经存在");
         }
 
@@ -65,8 +60,7 @@ public class EmployeeManageServiceImpl implements EmployeeManageService {
 
         // 检查手机号是否重复
 		boolean isPhoneNumberChanged = !oldEmployee.getBasicInfo().getPhoneNumber().equals(employee.getBasicInfo().getPhoneNumber());
-		if (isPhoneNumberChanged && employeeRepository.existsByPhoneNumber(employee.getTenantId(), employee.getOrganizationId(),
-				employee.getBasicInfo().getPhoneNumber())) {
+		if (isPhoneNumberChanged && employeeRepository.existsByPhoneNumber(employee.getBasicInfo().getPhoneNumber())) {
 			throw new DomainException("手机号码已经存在");
 		}
 
@@ -74,8 +68,7 @@ public class EmployeeManageServiceImpl implements EmployeeManageService {
 		if (employee.getBasicInfo().getEmailAddress() != null) {
 			boolean isEmailAddressChanged = !Objects.equals(oldEmployee.getBasicInfo().getEmailAddress(),
 					employee.getBasicInfo().getEmailAddress());
-			if (isEmailAddressChanged && employeeRepository.existsByEmailAddress(employee.getTenantId(), employee.getOrganizationId(),
-					employee.getBasicInfo().getEmailAddress())) {
+			if (isEmailAddressChanged && employeeRepository.existsByEmailAddress(employee.getBasicInfo().getEmailAddress())) {
 				throw new DomainException("邮箱地址已经存在");
 			}
 		}
@@ -83,8 +76,7 @@ public class EmployeeManageServiceImpl implements EmployeeManageService {
 		// 检查工号是否重复
 		if (StringUtils.isNotBlank(employee.getJobInfo().getNumber())) {
 			boolean isNumberChanged = !Objects.equals(oldEmployee.getJobInfo().getNumber(), employee.getJobInfo().getNumber());
-			if (isNumberChanged && employeeRepository.existsByEmployeeNumber(employee.getTenantId(), employee.getOrganizationId(),
-					employee.getJobInfo().getNumber())) {
+			if (isNumberChanged && employeeRepository.existsByEmployeeNumber(employee.getJobInfo().getNumber())) {
 				throw new DomainException("工号已经存在");
 			}
 		}
@@ -94,8 +86,7 @@ public class EmployeeManageServiceImpl implements EmployeeManageService {
 			boolean isIdCardNumberChanged = oldEmployee.getCredentialInfo().getIdCard() == null
 					|| !Objects.equals(oldEmployee.getCredentialInfo().getIdCard().getIdNumber(),
 							employee.getCredentialInfo().getIdCard().getIdNumber());
-			if (isIdCardNumberChanged && employeeRepository.existsByIdNumber(employee.getTenantId(), employee.getOrganizationId(),
-					employee.getCredentialInfo().getIdCard().getIdNumber())) {
+			if (isIdCardNumberChanged && employeeRepository.existsByIdNumber(employee.getCredentialInfo().getIdCard().getIdNumber())) {
 				throw new DomainException("身份证号已经存在");
 			}
 		}

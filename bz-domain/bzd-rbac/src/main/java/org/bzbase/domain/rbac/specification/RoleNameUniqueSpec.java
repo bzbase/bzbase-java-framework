@@ -1,11 +1,10 @@
 package org.bzbase.domain.rbac.specification;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import org.bzbase.domain.rbac.Role;
 import org.bzbase.domain.rbac.infrastructure.RoleRepository;
 import org.bzbase.library.ddd.specification.AbstractSpecification;
-
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 /**
  * 角色名称唯一性规约
@@ -18,6 +17,6 @@ public class RoleNameUniqueSpec extends AbstractSpecification<Role> {
     @Override
     public boolean isSatisfiedBy(Role role) {
         // 检查名称是否已存在
-        return !roleRepository.existsByName(role.getTenantId(), role.getOrganizationId(), role.getName());
+        return !roleRepository.existsByName(role.getName());
     }
-} 
+}

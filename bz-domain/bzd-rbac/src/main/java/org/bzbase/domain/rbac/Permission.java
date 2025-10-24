@@ -1,16 +1,15 @@
 package org.bzbase.domain.rbac;
 
-import java.time.Instant;
-import java.util.List;
-
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 import org.bzbase.domain.rbac.valueobject.DataScope;
 import org.bzbase.domain.rbac.valueobject.PermissionId;
 import org.bzbase.library.ddd.type.AbstractAggregateRoot;
 import org.bzbase.primitive.user.UserId;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import java.time.Instant;
+import java.util.List;
 
 /**
  * 权限聚合根

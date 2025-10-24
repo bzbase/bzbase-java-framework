@@ -1,14 +1,13 @@
 package org.bzbase.domain.user.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.bzbase.domain.user.User;
 import org.bzbase.domain.user.infrastructure.UserRepository;
 import org.bzbase.domain.user.service.UserChangePasswordService;
-import org.bzbase.primitive.user.UserId;
 import org.bzbase.library.ddd.exception.DomainException;
 import org.bzbase.primitive.password.PlainPassword;
 import org.bzbase.primitive.password.hasher.PasswordHasher;
-
-import lombok.RequiredArgsConstructor;
+import org.bzbase.primitive.user.UserId;
 
 /**
  * 用户密码修改领域服务实现

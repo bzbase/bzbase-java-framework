@@ -1,9 +1,8 @@
 package org.bzbase.domain.user.authentication.identity;
 
+import lombok.Value;
 import org.bzbase.library.security.identity.Identifier;
 import org.bzbase.primitive.phonenumber.PhoneNumber;
-
-import lombok.Value;
 
 /**
  * 手机号身份标识

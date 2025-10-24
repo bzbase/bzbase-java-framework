@@ -1,7 +1,6 @@
 package org.bzbase.domain.user.authentication.factor;
 
 import lombok.Value;
-
 import org.bzbase.domain.authentication.factor.AuthenticationFactor;
 import org.bzbase.domain.authentication.factor.AuthenticationFactorCategory;
 import org.bzbase.domain.authentication.factor.AuthenticationFactorType;

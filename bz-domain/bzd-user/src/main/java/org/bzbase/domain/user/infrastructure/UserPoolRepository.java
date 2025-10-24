@@ -1,10 +1,10 @@
 package org.bzbase.domain.user.infrastructure;
 
-import java.util.Optional;
-
 import org.bzbase.domain.user.UserPool;
 import org.bzbase.domain.user.valueobject.UserPoolId;
 import org.bzbase.library.ddd.type.Repository;
+
+import java.util.Optional;
 
 /**
  * 用户池资源库

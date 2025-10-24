@@ -1,14 +1,13 @@
 package org.bzbase.domain.user;
 
-import java.time.Instant;
-
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 import org.bzbase.domain.user.valueobject.UserPoolId;
 import org.bzbase.library.ddd.type.AbstractAggregateRoot;
 import org.bzbase.primitive.user.UserId;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import java.time.Instant;
 
 /**
  * 用户池聚合根

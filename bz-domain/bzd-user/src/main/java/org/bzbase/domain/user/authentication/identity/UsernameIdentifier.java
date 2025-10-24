@@ -1,9 +1,8 @@
 package org.bzbase.domain.user.authentication.identity;
 
+import lombok.Value;
 import org.bzbase.library.security.identity.Identifier;
 import org.bzbase.primitive.user.Username;
-
-import lombok.Value;
 
 /**
  * 用户名本地身份

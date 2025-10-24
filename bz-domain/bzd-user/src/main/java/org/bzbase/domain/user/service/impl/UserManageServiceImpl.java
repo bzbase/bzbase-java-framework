@@ -1,8 +1,6 @@
 package org.bzbase.domain.user.service.impl;
 
-import java.time.Instant;
-import java.util.Optional;
-
+import lombok.RequiredArgsConstructor;
 import org.bzbase.domain.user.User;
 import org.bzbase.domain.user.infrastructure.UserRepository;
 import org.bzbase.domain.user.service.UserManageService;
@@ -13,7 +11,8 @@ import org.bzbase.library.ddd.type.IdGenerator;
 import org.bzbase.library.security.identity.Identifier;
 import org.bzbase.primitive.user.UserId;
 
-import lombok.RequiredArgsConstructor;
+import java.time.Instant;
+import java.util.Optional;
 
 /**
  * 用户管理服务实现

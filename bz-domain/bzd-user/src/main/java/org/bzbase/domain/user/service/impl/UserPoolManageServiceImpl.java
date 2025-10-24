@@ -1,7 +1,6 @@
 package org.bzbase.domain.user.service.impl;
 
-import java.time.Instant;
-
+import lombok.RequiredArgsConstructor;
 import org.bzbase.domain.user.UserPool;
 import org.bzbase.domain.user.infrastructure.UserPoolRepository;
 import org.bzbase.domain.user.service.UserPoolManageService;
@@ -9,7 +8,7 @@ import org.bzbase.domain.user.valueobject.UserPoolId;
 import org.bzbase.library.ddd.exception.DomainException;
 import org.bzbase.library.ddd.type.IdGenerator;
 
-import lombok.RequiredArgsConstructor;
+import java.time.Instant;
 
 /**
  * 用户池管理服务实现

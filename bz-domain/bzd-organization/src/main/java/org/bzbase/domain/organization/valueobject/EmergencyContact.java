@@ -1,10 +1,9 @@
 package org.bzbase.domain.organization.valueobject;
 
-import org.bzbase.library.ddd.type.ValueObject;
-import org.bzbase.primitive.phonenumber.PhoneNumber;
-
 import lombok.Builder;
 import lombok.Value;
+import org.bzbase.library.ddd.type.ValueObject;
+import org.bzbase.primitive.phonenumber.PhoneNumber;
 
 /**
  * 紧急联系人值对象

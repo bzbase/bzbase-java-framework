@@ -1,9 +1,8 @@
 package org.bzbase.domain.user.authentication.identity;
 
+import lombok.Value;
 import org.bzbase.library.security.identity.Identifier;
 import org.bzbase.primitive.emailaddress.EmailAddress;
-
-import lombok.Value;
 
 /**
  * 邮箱地址本地身份

@@ -1,14 +1,13 @@
 package org.bzbase.domain.menu;
 
-import java.time.Instant;
-
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 import org.bzbase.domain.menu.valueobject.MenuCategoryId;
 import org.bzbase.library.ddd.type.AbstractAggregateRoot;
 import org.bzbase.primitive.user.UserId;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import java.time.Instant;
 
 @Getter
 @Builder(toBuilder = true)

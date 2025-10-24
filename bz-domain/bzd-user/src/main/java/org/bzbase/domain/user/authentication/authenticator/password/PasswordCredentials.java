@@ -2,7 +2,6 @@ package org.bzbase.domain.user.authentication.authenticator.password;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-
 import org.bzbase.domain.user.valueobject.UserPoolId;
 import org.bzbase.library.security.identity.Credentials;
 import org.bzbase.library.security.identity.Identifier;

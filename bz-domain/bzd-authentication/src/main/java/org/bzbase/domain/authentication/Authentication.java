@@ -1,9 +1,7 @@
 package org.bzbase.domain.authentication;
 
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.Set;
-
+import lombok.Builder;
+import lombok.Getter;
 import org.bzbase.domain.authentication.valueobject.AuthenticationId;
 import org.bzbase.domain.authentication.valueobject.AuthenticationStatus;
 import org.bzbase.domain.authentication.valueobject.FailureMessage;
@@ -14,8 +12,9 @@ import org.bzbase.library.security.identity.ClaimIdentity;
 import org.bzbase.library.security.identity.Identifier;
 import org.bzbase.library.security.identity.Identity;
 
-import lombok.Builder;
-import lombok.Getter;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.Set;
 
 /**
  * 身份认证聚合根，表示一次身份认证的过程。

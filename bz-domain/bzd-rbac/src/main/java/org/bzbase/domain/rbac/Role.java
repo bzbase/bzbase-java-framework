@@ -1,8 +1,9 @@
 package org.bzbase.domain.rbac;
 
-import java.time.Instant;
-import java.util.Set;
-
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 import org.bzbase.domain.rbac.valueobject.GrantedPermission;
 import org.bzbase.domain.rbac.valueobject.RoleId;
 import org.bzbase.library.ddd.type.AbstractAggregateRoot;
@@ -10,10 +11,8 @@ import org.bzbase.primitive.organization.OrganizationId;
 import org.bzbase.primitive.tenant.TenantId;
 import org.bzbase.primitive.user.UserId;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import java.time.Instant;
+import java.util.Set;
 
 /**
  * 角色聚合根

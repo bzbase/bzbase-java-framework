@@ -1,10 +1,10 @@
 package org.bzbase.domain.user.infrastructure;
 
 import org.bzbase.domain.user.User;
-import org.bzbase.primitive.user.UserId;
 import org.bzbase.domain.user.valueobject.UserPoolId;
 import org.bzbase.library.ddd.type.Repository;
 import org.bzbase.library.security.identity.Identifier;
+import org.bzbase.primitive.user.UserId;
 
 import java.util.Optional;
 

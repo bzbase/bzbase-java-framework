@@ -1,9 +1,6 @@
 package org.bzbase.domain.rbac.service.impl;
 
-import java.time.Instant;
-import java.util.Objects;
-import java.util.Set;
-
+import lombok.RequiredArgsConstructor;
 import org.bzbase.domain.rbac.Role;
 import org.bzbase.domain.rbac.infrastructure.RoleRepository;
 import org.bzbase.domain.rbac.service.RoleManageService;
@@ -15,7 +12,9 @@ import org.bzbase.domain.rbac.valueobject.RoleId;
 import org.bzbase.library.ddd.exception.DomainException;
 import org.bzbase.library.ddd.type.IdGenerator;
 
-import lombok.RequiredArgsConstructor;
+import java.time.Instant;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * 角色管理服务实现

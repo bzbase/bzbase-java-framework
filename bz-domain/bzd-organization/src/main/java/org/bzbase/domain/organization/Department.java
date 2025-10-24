@@ -1,7 +1,8 @@
 package org.bzbase.domain.organization;
 
-import java.time.Instant;
-
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 import org.bzbase.domain.organization.valueobject.DepartmentId;
 import org.bzbase.domain.organization.valueobject.EmployeeId;
 import org.bzbase.library.ddd.type.AbstractAggregateRoot;
@@ -9,9 +10,7 @@ import org.bzbase.primitive.organization.OrganizationId;
 import org.bzbase.primitive.tenant.TenantId;
 import org.bzbase.primitive.user.UserId;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import java.time.Instant;
 
 /**
  * 部门聚合根

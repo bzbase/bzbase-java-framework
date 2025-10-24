@@ -1,7 +1,6 @@
 package org.bzbase.domain.organization.service.impl;
 
-import java.time.Instant;
-
+import lombok.RequiredArgsConstructor;
 import org.bzbase.domain.organization.Organization;
 import org.bzbase.domain.organization.infrastructure.OrganizationRepository;
 import org.bzbase.domain.organization.service.OrganizationManageService;
@@ -9,7 +8,7 @@ import org.bzbase.library.ddd.exception.DomainException;
 import org.bzbase.library.ddd.type.IdGenerator;
 import org.bzbase.primitive.organization.OrganizationId;
 
-import lombok.RequiredArgsConstructor;
+import java.time.Instant;
 
 /**
  * 组织管理服务实现类
@@ -21,7 +20,7 @@ public class OrganizationManageServiceImpl implements OrganizationManageService 
 
     @Override
     public Organization createOrganization(Organization organization) {
-        if (organizationRepository.existsByName(organization.getTenantId(), organization.getName())) {
+        if (organizationRepository.existsByName(organization.getName())) {
             throw new DomainException("组织名称已经存在");
         }
 
@@ -38,7 +37,7 @@ public class OrganizationManageServiceImpl implements OrganizationManageService 
         Organization oldOrganization = getOrganizationById(organization.getId());
 
         boolean isNameChanged = !organization.getName().equals(oldOrganization.getName());
-        if (isNameChanged && organizationRepository.existsByName(organization.getTenantId(), organization.getName())) {
+        if (isNameChanged && organizationRepository.existsByName(organization.getName())) {
             throw new DomainException("组织名称已经存在");
         }
 

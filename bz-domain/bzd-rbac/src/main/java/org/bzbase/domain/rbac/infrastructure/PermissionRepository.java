@@ -1,11 +1,11 @@
 package org.bzbase.domain.rbac.infrastructure;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.bzbase.domain.rbac.Permission;
 import org.bzbase.domain.rbac.valueobject.PermissionId;
 import org.bzbase.library.ddd.type.Repository;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * 权限资源库

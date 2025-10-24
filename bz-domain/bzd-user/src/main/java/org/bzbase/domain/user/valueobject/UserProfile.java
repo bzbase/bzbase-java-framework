@@ -4,9 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Value;
 import lombok.With;
-
 import org.bzbase.library.ddd.type.ValueObject;
-import org.bzbase.primitive.person.*;
+import org.bzbase.primitive.person.Birthdate;
+import org.bzbase.primitive.person.Gender;
+import org.bzbase.primitive.person.Name;
 import org.bzbase.primitive.user.Nickname;
 import org.bzbase.primitive.user.Picture;
 import org.bzbase.primitive.user.PreferredUsername;

@@ -1,7 +1,6 @@
 package org.bzbase.domain.menu.service.impl;
 
-import java.time.Instant;
-
+import lombok.RequiredArgsConstructor;
 import org.bzbase.domain.menu.MenuCategory;
 import org.bzbase.domain.menu.infrastructure.MenuCategoryRepository;
 import org.bzbase.domain.menu.infrastructure.MenuRepository;
@@ -10,7 +9,7 @@ import org.bzbase.domain.menu.valueobject.MenuCategoryId;
 import org.bzbase.library.ddd.exception.DomainException;
 import org.bzbase.library.ddd.type.IdGenerator;
 
-import lombok.RequiredArgsConstructor;
+import java.time.Instant;
 
 /**
  * 菜单分类领域服务实现

@@ -1,10 +1,9 @@
 package org.bzbase.domain.rbac.valueobject;
 
-import java.io.Serializable;
-
+import lombok.Value;
 import org.bzbase.library.ddd.type.ValueObject;
 
-import lombok.Value;
+import java.io.Serializable;
 
 /**
  * 主体值对象

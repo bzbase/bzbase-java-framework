@@ -1,14 +1,12 @@
 package org.bzbase.domain.organization.valueobject;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
+import lombok.Value;
 import org.apache.commons.lang3.StringUtils;
 import org.bzbase.library.ddd.exception.DomainException;
 import org.bzbase.library.ddd.type.ValueObject;
 
-import lombok.NonNull;
-import lombok.Value;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * 银行卡值对象

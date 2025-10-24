@@ -1,8 +1,6 @@
 package org.bzbase.domain.user.authentication.authenticator.password;
 
-import java.util.HashSet;
-import java.util.Set;
-
+import lombok.AllArgsConstructor;
 import org.bzbase.domain.authentication.authenticator.AuthenticationException;
 import org.bzbase.domain.authentication.authenticator.Authenticator;
 import org.bzbase.domain.authentication.factor.AuthenticationFactor;
@@ -18,7 +16,8 @@ import org.bzbase.library.security.identity.Identity;
 import org.bzbase.primitive.password.HashedPassword;
 import org.bzbase.primitive.password.hasher.PasswordHasher;
 
-import lombok.AllArgsConstructor;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 账号密码认证器

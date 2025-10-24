@@ -1,8 +1,7 @@
 package org.bzbase.domain.organization.valueobject;
 
-import org.bzbase.library.ddd.type.AbstractId;
-
 import lombok.EqualsAndHashCode;
+import org.bzbase.library.ddd.type.AbstractId;
 
 /**
  * 部门聚合根唯一标识

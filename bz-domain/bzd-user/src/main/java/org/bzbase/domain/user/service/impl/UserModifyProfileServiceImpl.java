@@ -1,13 +1,12 @@
 package org.bzbase.domain.user.service.impl;
 
+import lombok.RequiredArgsConstructor;
 import org.bzbase.domain.user.User;
 import org.bzbase.domain.user.infrastructure.UserRepository;
 import org.bzbase.domain.user.service.UserModifyProfileService;
 import org.bzbase.domain.user.valueobject.UserProfile;
 import org.bzbase.library.ddd.exception.DomainException;
 import org.bzbase.primitive.user.UserId;
-
-import lombok.RequiredArgsConstructor;
 
 /**
  * 用户信息修改领域服务实现

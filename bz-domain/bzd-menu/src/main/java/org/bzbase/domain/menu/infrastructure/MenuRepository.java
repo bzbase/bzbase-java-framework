@@ -1,12 +1,12 @@
 package org.bzbase.domain.menu.infrastructure;
 
-import java.util.List;
-import java.util.Set;
-
 import org.bzbase.domain.menu.Menu;
 import org.bzbase.domain.menu.valueobject.MenuCategoryId;
 import org.bzbase.domain.menu.valueobject.MenuId;
 import org.bzbase.library.ddd.type.Repository;
+
+import java.util.List;
+import java.util.Set;
 
 /**
  * 菜单资源库

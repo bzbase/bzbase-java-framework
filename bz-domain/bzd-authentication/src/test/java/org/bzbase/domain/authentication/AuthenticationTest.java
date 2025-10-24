@@ -1,15 +1,15 @@
 package org.bzbase.domain.authentication;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-import java.util.Collections;
-
 import org.bzbase.domain.authentication.valueobject.AuthenticationId;
 import org.bzbase.domain.authentication.valueobject.FailureMessage;
 import org.bzbase.library.security.identity.Identifier;
 import org.bzbase.library.security.identity.Identity;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+
+import java.util.Collections;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  * 认证测试

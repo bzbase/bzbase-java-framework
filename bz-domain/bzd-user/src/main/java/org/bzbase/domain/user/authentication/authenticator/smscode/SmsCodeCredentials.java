@@ -1,12 +1,11 @@
 package org.bzbase.domain.user.authentication.authenticator.smscode;
 
+import lombok.Value;
 import org.bzbase.domain.user.authentication.identity.PhoneNumberIdentifier;
 import org.bzbase.domain.user.valueobject.UserPoolId;
 import org.bzbase.library.security.identity.Credentials;
 import org.bzbase.library.security.identity.Identifier;
 import org.bzbase.primitive.phonenumber.PhoneNumber;
-
-import lombok.Value;
 
 /**
  * 短信验证码身份凭证

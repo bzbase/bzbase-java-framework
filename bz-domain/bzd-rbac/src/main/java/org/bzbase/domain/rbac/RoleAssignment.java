@@ -1,9 +1,7 @@
 package org.bzbase.domain.rbac;
 
-import java.time.Instant;
-import java.util.Collections;
-import java.util.Set;
-
+import lombok.Builder;
+import lombok.Getter;
 import org.bzbase.domain.rbac.valueobject.RoleAssignmentId;
 import org.bzbase.domain.rbac.valueobject.RoleId;
 import org.bzbase.domain.rbac.valueobject.Subject;
@@ -12,8 +10,9 @@ import org.bzbase.primitive.organization.OrganizationId;
 import org.bzbase.primitive.tenant.TenantId;
 import org.bzbase.primitive.user.UserId;
 
-import lombok.Builder;
-import lombok.Getter;
+import java.time.Instant;
+import java.util.Collections;
+import java.util.Set;
 
 /**
  * 角色分配

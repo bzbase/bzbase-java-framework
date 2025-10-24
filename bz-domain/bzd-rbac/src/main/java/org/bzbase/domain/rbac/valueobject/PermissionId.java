@@ -1,8 +1,7 @@
 package org.bzbase.domain.rbac.valueobject;
 
-import org.bzbase.library.ddd.type.AbstractId;
-
 import lombok.EqualsAndHashCode;
+import org.bzbase.library.ddd.type.AbstractId;
 
 /**
  * 权限聚合根唯一标识

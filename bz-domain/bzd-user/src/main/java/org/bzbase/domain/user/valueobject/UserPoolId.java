@@ -1,8 +1,7 @@
 package org.bzbase.domain.user.valueobject;
 
-import org.bzbase.library.ddd.type.AbstractId;
-
 import lombok.EqualsAndHashCode;
+import org.bzbase.library.ddd.type.AbstractId;
 
 /**
  * 用户持聚合根唯一标示

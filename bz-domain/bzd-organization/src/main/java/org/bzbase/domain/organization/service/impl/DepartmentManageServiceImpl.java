@@ -1,7 +1,6 @@
 package org.bzbase.domain.organization.service.impl;
 
-import java.time.Instant;
-
+import lombok.RequiredArgsConstructor;
 import org.bzbase.domain.organization.Department;
 import org.bzbase.domain.organization.infrastructure.DepartmentRepository;
 import org.bzbase.domain.organization.service.DepartmentManageService;
@@ -9,7 +8,7 @@ import org.bzbase.domain.organization.valueobject.DepartmentId;
 import org.bzbase.library.ddd.exception.DomainException;
 import org.bzbase.library.ddd.type.IdGenerator;
 
-import lombok.RequiredArgsConstructor;
+import java.time.Instant;
 
 /**
  * 部门管理服务实现类
@@ -21,8 +20,7 @@ public class DepartmentManageServiceImpl implements DepartmentManageService {
 
     @Override
     public Department createDepartment(Department department) {
-        if (departmentRepository.existsByName(department.getTenantId(), department.getOrganizationId(),
-                department.getName())) {
+        if (departmentRepository.existsByName(department.getName())) {
             throw new DomainException("部门名称已经存在");
         }
 
@@ -39,8 +37,7 @@ public class DepartmentManageServiceImpl implements DepartmentManageService {
         Department oldDepartment = getDepartmentById(department.getId());
 
         boolean isNameChanged = !oldDepartment.getName().equals(department.getName());
-        if (isNameChanged && departmentRepository.existsByName(department.getTenantId(), department.getOrganizationId(),
-                department.getName())) {
+        if (isNameChanged && departmentRepository.existsByName(department.getName())) {
             throw new DomainException("部门名称已经存在");
         }
 
@@ -51,8 +48,7 @@ public class DepartmentManageServiceImpl implements DepartmentManageService {
     public Department deleteDepartment(DepartmentId departmentId) {
         Department department = getDepartmentById(departmentId);
 
-        if (departmentRepository.existsByParentId(department.getTenantId(), department.getOrganizationId(),
-                departmentId)) {
+        if (departmentRepository.existsByParentId(departmentId)) {
             throw new DomainException("指定的部门存在子部门，不能删除");
         }
 

@@ -1,11 +1,8 @@
 package org.bzbase.domain.user;
 
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
-
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
 import org.bzbase.domain.authentication.factor.AuthenticationFactor;
 import org.bzbase.domain.authentication.factor.AuthenticationFactorType;
 import org.bzbase.domain.user.authentication.factor.PasswordFactor;
@@ -21,9 +18,11 @@ import org.bzbase.primitive.password.PlainPassword;
 import org.bzbase.primitive.password.hasher.PasswordHasher;
 import org.bzbase.primitive.user.UserId;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 /**
  * 用户聚合根

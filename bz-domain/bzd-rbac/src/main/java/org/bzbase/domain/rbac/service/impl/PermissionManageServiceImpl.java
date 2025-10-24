@@ -1,7 +1,6 @@
 package org.bzbase.domain.rbac.service.impl;
 
-import java.time.Instant;
-
+import lombok.RequiredArgsConstructor;
 import org.bzbase.domain.rbac.Permission;
 import org.bzbase.domain.rbac.infrastructure.PermissionRepository;
 import org.bzbase.domain.rbac.service.PermissionManageService;
@@ -11,7 +10,7 @@ import org.bzbase.domain.rbac.valueobject.PermissionId;
 import org.bzbase.library.ddd.exception.DomainException;
 import org.bzbase.library.ddd.type.IdGenerator;
 
-import lombok.RequiredArgsConstructor;
+import java.time.Instant;
 
 /**
  * 权限管理服务实现
