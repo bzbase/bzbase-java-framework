@@ -4,6 +4,7 @@ import org.bzbase.domain.organization.Employee;
 import org.bzbase.domain.organization.valueobject.EmployeeId;
 import org.bzbase.library.ddd.type.Repository;
 import org.bzbase.primitive.emailaddress.EmailAddress;
+import org.bzbase.primitive.organization.OrganizationId;
 import org.bzbase.primitive.person.IdNumber;
 import org.bzbase.primitive.phonenumber.PhoneNumber;
 import org.bzbase.primitive.user.UserId;
@@ -17,12 +18,13 @@ import java.util.Optional;
  */
 public interface EmployeeRepository extends Repository<Employee, EmployeeId> {
 	/**
-	 * 根据用户账号ID查询员工
-	 * 
-	 * @param userAccountId  用户账号ID
-	 * @return 员工
-	 */
-	Optional<Employee> findByUserAccountId(UserId userAccountId);
+     * 根据用户账号ID查询员工
+     *
+     * @param organizationId 组织ID
+     * @param userAccountId  用户账号ID
+     * @return 员工
+     */
+	Optional<Employee> findByUserAccountId(OrganizationId organizationId, UserId userAccountId);
 
 	/**
 	 * 判断是否存在指定手机号码的员工
