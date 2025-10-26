@@ -2,6 +2,7 @@ package org.bzbase.domain.organization.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.bzbase.domain.organization.Organization;
+import org.bzbase.domain.organization.event.OrganizationCreatedEvent;
 import org.bzbase.domain.organization.infrastructure.OrganizationRepository;
 import org.bzbase.domain.organization.service.OrganizationManageService;
 import org.bzbase.library.ddd.exception.DomainException;
@@ -28,6 +29,7 @@ public class OrganizationManageServiceImpl implements OrganizationManageService 
             organization.setId(new OrganizationId(idGenerator.generate()));
         }
         organization.setCreatedAt(Instant.now());
+        organization.registerDomainEvent(new OrganizationCreatedEvent(organization));
 
         return organization;
     }
