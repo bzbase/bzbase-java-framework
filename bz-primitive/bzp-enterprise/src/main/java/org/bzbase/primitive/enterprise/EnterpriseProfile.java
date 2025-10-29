@@ -44,6 +44,10 @@ public class EnterpriseProfile implements ValueObject {
      * 营业期限，可为空
      */
     BusinessTerm businessTerm;
+    /**
+     * 营业执照
+     */
+    BusinessLicense businessLicense;
 
     /**
      * 使用给定信息创建企业档案
@@ -56,6 +60,7 @@ public class EnterpriseProfile implements ValueObject {
      * @param establishmentDate 成立日期，可为空
      * @param registeredAddress 注册地址，可为空
      * @param businessTerm 营业期限，可为空
+     * @param businessLicense 营业执照
      * @return 企业档案值对象
      */
     public static EnterpriseProfile of(UnifiedSocialCreditCode unifiedSocialCreditCode,
@@ -65,7 +70,8 @@ public class EnterpriseProfile implements ValueObject {
                                        BigDecimal registeredCapital,
                                        LocalDate establishmentDate,
                                        String registeredAddress,
-                                       BusinessTerm businessTerm) {
+                                       BusinessTerm businessTerm,
+                                       BusinessLicense businessLicense) {
         return new EnterpriseProfile(unifiedSocialCreditCode,
                 enterpriseName,
                 enterpriseType,
@@ -73,7 +79,8 @@ public class EnterpriseProfile implements ValueObject {
                 registeredCapital,
                 establishmentDate,
                 registeredAddress,
-                businessTerm);
+                businessTerm,
+                businessLicense);
     }
 
     /**
@@ -87,6 +94,7 @@ public class EnterpriseProfile implements ValueObject {
      * @param establishmentDate 成立日期，可为空
      * @param registeredAddress 注册地址，可为空
      * @param businessTerm 营业期限，可为空
+     * @param businessLicense 营业执照
      */
     private EnterpriseProfile(UnifiedSocialCreditCode unifiedSocialCreditCode,
                               EnterpriseName enterpriseName,
@@ -95,7 +103,8 @@ public class EnterpriseProfile implements ValueObject {
                               BigDecimal registeredCapital,
                               LocalDate establishmentDate,
                               String registeredAddress,
-                              BusinessTerm businessTerm) {
+                              BusinessTerm businessTerm,
+                              BusinessLicense businessLicense) {
         this.unifiedSocialCreditCode = unifiedSocialCreditCode;
         this.enterpriseName = enterpriseName;
         this.enterpriseType = enterpriseType;
@@ -104,5 +113,6 @@ public class EnterpriseProfile implements ValueObject {
         this.establishmentDate = establishmentDate;
         this.registeredAddress = registeredAddress;
         this.businessTerm = businessTerm;
+        this.businessLicense = businessLicense;
     }
 }
